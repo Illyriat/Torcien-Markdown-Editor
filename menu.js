@@ -83,17 +83,12 @@ const template = [
       },
     ],
   },
-  {
-    role: "help",
-    submenu: [
-      {
-        label: "About Editor Component",
-        click: async () => {
-          await shell.openExternal("https://simplemde.com/");
-        },
-      },
-    ],
-  },
+//   {
+//     role: "help",
+//     submenu: [
+      
+//     ],
+//   },
 ];
 
 if (process.platform === "darwin") {
@@ -160,6 +155,12 @@ if (process.env.DEBUG) {
                 "https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API"
             );
         }
+      },
+      {
+        label: "About Editor Component",
+        click: async () => {
+          await shell.openExternal("https://simplemde.com/");
+        },
       }
     ],
   });
