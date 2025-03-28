@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Torcien - Markdown Editor</title>
+  <link rel="stylesheet" href="./node_modules/simplemde/dist/simplemde.min.css" />
+  <script src="./node_modules/simplemde/dist/simplemde.min.js"></script>
+</head>
+
+<style>
+  html, body {
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+  .CodeMirror {
+    flex: 1;
+  }
+</style>
+
+<body ondrop="dropHandler(event);">
+  <textarea id="editor"></textarea>
+  <script>
+    const { ipcRenderer } = require('electron');
+    const simplemde = new SimpleMDE({ element: document.getElementById("editor") });
+
+    ipcRenderer.on('editor-event', (event, arg, payload) => {
+      console.log('editor-event:', arg);
+
+      if (arg === 'toggle-bold') simplemde.toggleBold();
+      if (arg === 'toggle-italic') simplemde.toggleItalic();
+      if (arg === 'toggle-strikethrough') simplemde.toggleStrikethrough();
+      if (arg === 'save') ipcRenderer.send('save', simplemde.value());
+      if (arg === 'load') {
+        console.log('Loading file content into editor...');
+        simplemde.value(payload);
+      }
+
+      ipcRenderer.send('editor-reply', `Handled ${arg}`);
+    });
+
+    ipcRenderer.send('editor-reply', 'Page Loaded');
+
+    function dropHandler(event) {
+      console.log('File(s) dropped:');
+        event.preventDefault();
+
+        if (event.dataTransfer.items) {
+            if (event.dataTransfer.items[0].kind === 'file') {
+                var file = event.dataTransfer.items[0].getAsFile();
+                   if (file.type !== 'text/markdown') {
+                    var reader = new FileReader();
+                    reader.onload = e => {
+                        console.log(e.target.result);
+                        simplemde.codemirror.setValue(e.target.result);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+    }
+  </script>
+</body>
+</html>

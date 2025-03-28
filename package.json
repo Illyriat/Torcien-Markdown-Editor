@@ -1,0 +1,49 @@
+{
+  "name": "torcienmarkdowneditor",
+  "version": "1.0.0",
+  "description": "A simple markdown editor built with Electron and SimpleMDE.",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "scripts": {
+    "start": "cross-env DEBUG=true electron .",
+    "build": "electron-builder",
+    "build:macos": "electron-builder --macos --dir",
+    "build:win": "electron-builder --win --dir",
+    "build:linux": "electron-builder --linux --dir",
+    "publish:github": "electron-builder --mac -p always",
+    "publish:github:win": "electron-builder --win -p always"
+,
+    "publish:github:linux": "electron-builder --linux -p always",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "appId": "com.torcien.markdowneditor",
+    "productName": "Torcien Markdown Editor",
+    "files": [
+      "**/*"
+    ],
+    "directories": {
+      "buildResources": "build"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Illyriat",
+        "repo": "Torcien-Markdown-Editor"
+      }
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "dotenv-cli": "^8.0.0",
+    "electron": "^7.0.0",
+    "electron-builder": "^21.2.0"
+  },
+  "dependencies": {
+    "electron-updater": "^6.6.2",
+    "simplemde": "^1.11.2"
+  }
+}
