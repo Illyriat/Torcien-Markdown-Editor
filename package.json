@@ -1,6 +1,6 @@
 {
   "name": "torcienmarkdowneditor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple markdown editor built with Electron and SimpleMDE.",
   "main": "index.js",
   "author": "",

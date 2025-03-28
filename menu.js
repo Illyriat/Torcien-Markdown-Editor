@@ -7,6 +7,9 @@ const {
   globalShortcut,
 } = require("electron");
 
+const appName = "Torcien"
+const { version: appVersion } = require('./package.json');
+
 // Local imports
 const { loadFile } = require("./helpers/menuFunctions/Load.js");
 const {
@@ -56,6 +59,17 @@ const template = [
         { type: "separator" },
         { role: "quit" },
     ]
+  },
+  {
+    label: "About",
+    submenu: [
+      {
+        label: `${appName}`
+      },
+      {
+        label: `Version: ${appVersion}`
+      },
+    ],
   },
   {
     label: "Format",
