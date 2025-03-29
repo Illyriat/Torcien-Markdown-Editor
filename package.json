@@ -24,6 +24,12 @@
     "files": [
       "**/*"
     ],
+    "win": {
+      "icon": "assets/win/Torcien_Icon.ico"
+    },
+    "linux": {
+      "icon": "assets/png/Torcien_logo1.png"
+    },
     "directories": {
       "buildResources": "build"
     },
